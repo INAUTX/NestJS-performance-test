@@ -9,6 +9,9 @@ export class Player {
   @Column()
   name: string;
 
+  @Column({ default: 0 })
+  goals: number;
+
   @ManyToOne(() => Team, (team) => team.players, { onDelete: 'CASCADE' })
   team: Team;
 }

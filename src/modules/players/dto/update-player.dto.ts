@@ -7,6 +7,11 @@ export class UpdatePlayerDto {
   @IsString()
   name?: string;
 
+  @ApiPropertyOptional({ example: 5, description: 'Number of goals scored by the player' })
+  @IsOptional()
+  @IsNumber()
+  goals?: number;
+
   @ApiPropertyOptional({ example: 1, description: 'ID of the team to which the player belongs' })
   @IsOptional()
   @IsNumber()

@@ -13,6 +13,9 @@ export class Team {
   @Column({ default: true })
   isActive: boolean;  // Indicates whether the team is still participating in the tournament.
 
+  @Column({ type: 'int', default: 0 })
+  points: number; // Points earned by the team in the tournament.
+
   @OneToMany(() => Player, (player) => player.team)
   players: Player[];
 

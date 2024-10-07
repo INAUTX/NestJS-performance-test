@@ -6,7 +6,7 @@ export class CreatePlayerDto {
   @IsNotEmpty()
   @IsString()
   name: string;
-
+    
   @ApiProperty({ example: 1, description: 'ID of the team to which the player belongs' })
   @IsNotEmpty()
   @IsNumber()

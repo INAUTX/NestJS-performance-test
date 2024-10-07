@@ -16,4 +16,9 @@ export class UpdateTeamDto {
   @IsOptional()
   @IsNumber()
   tournamentId?: number;
+
+  @ApiPropertyOptional({ example: 10, description: 'Points earned by the team in the tournament' })
+  @IsOptional()
+  @IsNumber()
+  points?: number;
 }
