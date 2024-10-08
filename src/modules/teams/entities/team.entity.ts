@@ -1,5 +1,5 @@
-import { Player } from 'src/modules/players/entities/player.entity';
-import { Tournament } from 'src/modules/tournaments/entities/tournament.entity';
+import { Player } from '../../players/entities/player.entity';
+import { Tournament } from '../../tournaments/entities/tournament.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from 'typeorm';
 
 @Entity('teams')
