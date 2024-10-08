@@ -5,7 +5,9 @@ import { PlayersModule } from './modules/players/players.module';
 import { TournamentsModule } from './modules/tournaments/tournaments.module';
 import { TeamsModule } from './modules/teams/teams.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-require('dotenv').config();
+import { config } from 'dotenv';
+import { MatchsModule } from './modules/matchs/matchs.module';
+config();
 
 
 
@@ -22,8 +24,6 @@ require('dotenv').config();
       synchronize: true,
     }
   ),
-  PlayersModule, TournamentsModule, TeamsModule],
-  controllers: [AppController],
-  providers: [AppService],
+  PlayersModule, TournamentsModule, TeamsModule, MatchsModule]
 })
 export class AppModule {}
