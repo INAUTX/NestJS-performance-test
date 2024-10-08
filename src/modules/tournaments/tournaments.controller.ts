@@ -38,7 +38,7 @@ export class TournamentsController {
   }
 
   @Get('won-by-team/:teamId')
-  @ApiOperation({ summary: 'Get paginated tournaments won by a specific team ejm "/tournaments/won-by-team/3?page=2&limit=5"' })
+  @ApiOperation({ summary: 'Get paginated tournaments won by a specific team' })
   @ApiParam({ name: 'teamId', type: 'number', description: 'ID of the team' })
   @ApiQuery({ name: 'page', type: 'number', required: false, description: 'Page number for pagination', example: 1 })
   @ApiQuery({ name: 'limit', type: 'number', required: false, description: 'Number of results per page', example: 10 })
@@ -87,5 +87,18 @@ export class TournamentsController {
     return this.tournamentsService.updateWinner(tournamentId, winnerId);
   }
 
+  @Get(':tournamentId/active-teams')
+  @ApiOperation({ summary: 'Get active teams of a tournament with pagination' })
+  @ApiParam({ name: 'tournamentId', type: 'number', description: 'ID of the tournament' })
+  @ApiQuery({ name: 'page', type: 'number', required: false, description: 'Page number for pagination', example: 1 })
+  @ApiQuery({ name: 'limit', type: 'number', required: false, description: 'Number of items per page', example: 10 })
+  @ApiResponse({ status: 200, description: 'Filtered list of active teams retrieved successfully.' })
+  async getActiveTeamsByTournament(
+    @Param('tournamentId', ParseIntPipe) tournamentId: number,
+    @Query('page') page: number = 1,
+    @Query('limit') limit: number = 10,
+  ) {
+    return this.tournamentsService.findTeamsByTournamentWithFilter(tournamentId, page, limit);
+  }
 
 }

@@ -92,5 +92,27 @@ export class TournamentsService {
     return this.tournamentRepository.save(tournament);
   }
 
+  async findTeamsByTournamentWithFilter(
+    tournamentId: number,
+    page: number = 1,
+    limit: number = 10,
+  ): Promise<{ data: Team[]; total: number; currentPage: number; totalPages: number }> {
+    const queryBuilder = this.teamRepository
+      .createQueryBuilder('team')
+      .leftJoinAndSelect('team.tournament', 'tournament')
+      .where('tournament.id = :tournamentId', { tournamentId })
+      .andWhere('team.isActive = :isActive', { isActive: true })
+      .take(limit)
+      .skip((page - 1) * limit);
+
+    const [data, total] = await queryBuilder.getManyAndCount();
+
+    return {
+      data,
+      total,
+      currentPage: page,
+      totalPages: Math.ceil(total / limit),
+    };
+  }
   
 }
